@@ -1,0 +1,8 @@
+# 这里的路径必须指向你的数据集根目录
+path: C:/nutri-pal/datasets 
+train: images  # 这里会自动读取 images 文件夹下所有的图片
+val: images    # 验证集暂时也指向这里
+
+nc: 3
+# 顺序必须与你标注时的 ID 对应
+names: ['redbull', 'oreo', 'orange']
