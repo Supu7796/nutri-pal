@@ -88,10 +88,5 @@ python main.py
 - 提交 bug 请附带复现步骤与相关日志
 - 若要新增功能，请先在 issue 中讨论设计方案
 
-## 授权协议
+<img width="2607" height="3445" alt="流程图" src="https://github.com/user-attachments/assets/0bd635bc-f9fb-46cd-a5a8-e9dd20256eaf" />
 
-本仓库默认未指明许可证。若需要，请添加合适的 LICENSE 文件（例如 MIT, Apache-2.0 等）。
-
----
-
-此 README 为模板草稿。若你希望我基于仓库中具体文件（如 requirements.txt、train.py、detect.py、main.py）生成更精确的使用与安装说明，请允许我查看这些文件，我会把 README 调整为可直接运行的版本。
