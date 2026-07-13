@@ -91,7 +91,6 @@ python main.py
 <img width="2607" height="3445" alt="流程图" src="https://github.com/user-attachments/assets/0bd635bc-f9fb-46cd-a5a8-e9dd20256eaf" />
 <img width="8833" height="1136" alt="流程图 (2)" src="https://github.com/user-attachments/assets/96fc63e6-d7b7-4991-9e80-17681b5ea7b9" />
 <img width="1600" height="1600" alt="labels" src="https://github.com/user-attachments/assets/e81f09a0-5736-436f-9d0e-acc34492a8d5" />
-<img width="1920" height="1920" alt="val_batch0_labels" src="https://github.com/user-attachments/assets/725ebbab-b9ff-4442-8672-627cc726da3c" />
 <img width="1920" height="1920" alt="train_batch82" src="https://github.com/user-attachments/assets/2fefc3c2-e941-43c0-997f-96aeb2ee3338" />
 
 
