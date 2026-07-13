@@ -89,8 +89,12 @@ python main.py
 - 若要新增功能，请先在 issue 中讨论设计方案
 
 <img width="2607" height="3445" alt="流程图" src="https://github.com/user-attachments/assets/0bd635bc-f9fb-46cd-a5a8-e9dd20256eaf" />
-<img width="8833" height="1136" alt="流程图 (2)" src="https://github.com/user-attachments/assets/96fc63e6-d7b7-4991-9e80-17681b5ea7b9" />
-<img width="1600" height="1600" alt="labels" src="https://github.com/user-attachments/assets/e81f09a0-5736-436f-9d0e-acc34492a8d5" />
+<img width="1323" height="615" alt="63c704007359d948281ab13caf736585" src="https://github.com/user-attachments/assets/c0400893-74fb-4ed9-872b-4007d7d618bd" />
+
+
+<img width="2070" height="995" alt="a4ebcdb9c90e6b6a962d3cd0e16b6acc" src="https://github.com/user-attachments/assets/2467b585-ddef-4a80-9eb6-3f5a8cad90f1" />
+<img width="2400" height="1200" alt="b4c29daa1957c378ca85f514c8020ba9" src="https://github.com/user-attachments/assets/9653dc02-0a64-4095-aca9-e2ffa0fdf8d4" />
+
 <img width="1920" height="1920" alt="train_batch82" src="https://github.com/user-attachments/assets/2fefc3c2-e941-43c0-997f-96aeb2ee3338" />
 
 
