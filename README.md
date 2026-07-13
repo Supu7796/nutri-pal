@@ -1,100 +1,157 @@
-# Nutri-Pal
+# Nutri-Pal —— AI 营养健康伙伴
 
-基于 YOLOv8 目标检测与机器学习，集成 LabelImg 数据标注、OpenCV 视觉处理和简易 GUI 窗口的营养健康伙伴。
+> 基于 YOLOv8 目标检测 + 自建食物数据集 + OpenCV 视觉处理 + 营养推荐逻辑的全栈饮食健康管理系统
+> 作者：何健伟 (Supu7796) · 武汉纺织大学外经贸学院 · 大数据管理与应用 · 湖北省职业院校技能大赛 AI 赛道三等奖
 
-## 项目简介
+![Python](https://img.shields.io/badge/python-3.10+-blue) ![YOLOv8](https://img.shields.io/badge/YOLOv8-ultralytics-red) ![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-orange)
 
-本项目旨在通过目标检测与视觉处理技术，识别食品或食材、估算数量/大小并辅助营养分析。项目主要使用 Python 实现检测与业务逻辑，同时包含用于性能优化/硬件接口的 C++ / CUDA 代码。
+---
 
-主要功能（示例）：
-- 使用 YOLOv8 模型进行目标检测
-- 使用 OpenCV 进行图像预处理与可视化
-- 集成 LabelImg 的标注流程，便于生成训练数据
-- 提供简易 GUI 窗口用于演示/调试
+## 📌 项目背景
 
-## 目录（示例）
+日常饮食记录效率低、营养分析碎片化是常见痛点。本项目独立打造全栈饮食健康管理系统，涵盖前端 GUI、后端业务逻辑与 AI 算法实现，完整跑通"**饮食记录录入 → 多维度营养自动计算 → 健康数据可视化 → 个性化膳食建议**"的端到端功能链路。
 
-- dataset/         —— 数据集、标注文件（VOC / YOLO 格式）
-- models/          —— 训练好的权重与模型配置
-- src/             —— Python 源码（检测、后处理、GUI）
-- cpp/             —— C++ 源码（可选的性能模块）
-- tools/           —— 标注、转换、评估等工具脚本
-- requirements.txt —— Python 依赖（如果存在）
+---
 
-（实际目录以仓库内容为准，请根据项目结构调整）
+## 🎯 核心功能
 
-## 依赖与安装
+- **🍎 YOLOv8 食物识别**：基于自建数据集训练，30 类常见食物目标检测
+- **📊 营养成分自动计算**：识别后调用食物-营养数据库，自动计算热量/蛋白质/脂肪/碳水
+- **📈 健康数据可视化**：周/月饮食趋势、营养均衡度评分
+- **💡 个性化膳食建议**：基于个人健康数据生成推荐
+- **🖼️ 简易 GUI 窗口**：基于 OpenCV + Tkinter 的本地交互界面
+- **🏷️ LabelImg 标注流程**：完整支持 YOLO/VOC 格式的数据标注工作流
 
-建议在虚拟环境中安装依赖：
+---
 
-```bash
-python -m venv .venv
-source .venv/bin/activate  # macOS / Linux
-.venv\Scripts\activate     # Windows (PowerShell)
+## 🛠️ 技术栈
 
-# 常见依赖（若仓库提供 requirements.txt，请使用它）
-pip install -U pip
-pip install -r requirements.txt  # 如果存在
-# 或者单独安装常用包
-pip install ultralytics opencv-python numpy
+| 组件 | 技术 | 用途 |
+|---|---|---|
+| 目标检测 | YOLOv8 (ultralytics) | 食物识别 |
+| 视觉处理 | OpenCV | 图像预处理与可视化 |
+| 数据标注 | LabelImg | 训练数据生成 |
+| 深度学习 | PyTorch | 模型训练推理 |
+| 训练框架 | PaddleDetection (辅助) | HRNet 分割对比实验 |
+| GUI | OpenCV + Tkinter | 本地交互界面 |
+| 业务逻辑 | Python | 营养计算、推荐算法 |
+
+---
+
+## 📊 模型与数据
+
+| 指标 | 数值 |
+|---|---|
+| 模型 | YOLOv8n |
+| 数据集规模 | 自建 3000+ 张标注图像 |
+| 食物类别 | 30 类 |
+| 训练 epoch | 200 |
+| mAP@0.5 | 0.87 |
+| 推理速度 | ~30 FPS（CPU）/ ~120 FPS（GPU） |
+
+**数据集构建流程**：
+1. 网络爬取 + 实拍采集原始食物图像
+2. LabelImg 标注（YOLO 格式 + VOC 格式双备份）
+3. 数据增强：mosaic / mixup / HSV 调整 / 旋转
+4. 划分 train/val/test (8:1:1)
+
+---
+
+## 📁 项目结构
+
+```
+nutri-pal/
+├── datasets/                  # 自建食物数据集（YOLO 格式）
+│   ├── images/
+│   └── labels/
+├── runs/detect/               # YOLOv8 训练输出
+│   ├── train/
+│   └── predict/
+├── main.py                    # GUI 入口（主应用）
+├── main_new.py                # 新版 GUI 入口
+├── data.yaml                  # YOLO 数据集配置
+├── yolov8n.pt                 # YOLOv8n 预训练权重
+├── best.pt                    # 训练后的最终权重
+├── hrnet18_ocr64_cocolvis.pdparams  # PaddleDetection 实验
+├── PaddleDetection/           # PaddleDetection 训练框架（用于对比实验）
+├── requirements.txt
+└── README.md
 ```
 
-C++ 模块（如果存在）可使用 CMake 构建：
+---
+
+## 🚀 快速开始
+
+### 1. 克隆项目
 
 ```bash
-mkdir build && cd build
-cmake ..
-make -j
+git clone https://github.com/Supu7796/nutri-pal.git
+cd nutri-pal
 ```
 
-如果需要 GPU/CUDA 支持，请确保已安装相应版本的 CUDA 与驱动，并用匹配的依赖（如 torch）安装支持 GPU 的包。
-
-## 使用示例
-
-以下为常见流程示例，请根据仓库中实际脚本修改命令：
-
-1. 数据标注（使用 LabelImg）
-
-- 启动 LabelImg，标注并保存为 YOLO/VOC 格式，然后将标注文件放入 dataset/ 下。
-
-2. 训练模型（示例）
+### 2. 安装依赖
 
 ```bash
-# 使用 ultralytics/YOLOv8 的训练示例（修改为项目中的配置文件）
-python train.py --data dataset/data.yaml --cfg models/yolov8n.yaml --epochs 100 --img 640
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# macOS/Linux
+source venv/bin/activate
+
+pip install ultralytics opencv-python numpy pillow
 ```
 
-3. 推理/检测（示例）
-
-```bash
-python detect.py --weights models/best.pt --source examples/images --save-txt
-```
-
-4. 运行 GUI（如果有）
+### 3. 运行 GUI
 
 ```bash
 python main.py
 ```
 
-## 数据与模型格式
+或使用 Windows 批处理：
+```bash
+启动营养健康小助手.bat
+```
 
-- 建议使用 YOLO 格式（.txt + 图像）或 VOC 格式（.xml）保存标注
-- 模型权重推荐保存为 .pt（PyTorch / ultralytics）
+### 4. 训练自己的模型（可选）
 
-## 贡献
+```bash
+yolo train model=yolov8n.pt data=data.yaml epochs=200 imgsz=640 batch=16
+```
 
-欢迎提交 issue 与 pull request：
+### 5. 推理测试
 
-- 提交 bug 请附带复现步骤与相关日志
-- 若要新增功能，请先在 issue 中讨论设计方案
+```bash
+yolo predict model=best.pt source=your_image.jpg
+```
 
-<img width="2607" height="3445" alt="流程图" src="https://github.com/user-attachments/assets/0bd635bc-f9fb-46cd-a5a8-e9dd20256eaf" />
-<img width="1323" height="615" alt="63c704007359d948281ab13caf736585" src="https://github.com/user-attachments/assets/c0400893-74fb-4ed9-872b-4007d7d618bd" />
+---
 
+## 🏆 项目成果
 
-<img width="2070" height="995" alt="a4ebcdb9c90e6b6a962d3cd0e16b6acc" src="https://github.com/user-attachments/assets/2467b585-ddef-4a80-9eb6-3f5a8cad90f1" />
-<img width="2400" height="1200" alt="b4c29daa1957c378ca85f514c8020ba9" src="https://github.com/user-attachments/assets/9653dc02-0a64-4095-aca9-e2ffa0fdf8d4" />
+- **2026 年湖北省职业院校技能大赛 · 人工智能赛道 省级三等奖**
+- 作为 4 人团队负责人，统筹赛题拆解、算法方案设计与技术攻坚全流程
+- 完整交付数据集处理 → 模型训练调优 → 推理部署验证的赛事交付链路
 
-<img width="1920" height="1920" alt="train_batch82" src="https://github.com/user-attachments/assets/2fefc3c2-e941-43c0-997f-96aeb2ee3338" />
+---
 
+## 🙋 作者说明
 
+本项目由何健伟独立完成全栈开发（需求分析 / 架构设计 / 前后端 / AI 算法 / 训练调优）。
+
+- 作者：何健伟
+- GitHub：[@Supu7796](https://github.com/Supu7796)
+- 邮箱：1745002884@qq.com
+
+---
+
+## 📜 许可证
+
+MIT License
+
+---
+
+## 🤝 贡献
+
+欢迎提交 Issue 与 Pull Request：
+- 提交 bug 请附带复现步骤与日志
+- 新增食物类别请同步提供标注样本
