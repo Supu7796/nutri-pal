@@ -1,7 +1,6 @@
 # Nutri-Pal —— AI 营养健康伙伴
 
 > 基于 YOLOv8 目标检测 + 自建食物数据集 + OpenCV 视觉处理 + 营养推荐逻辑的全栈饮食健康管理系统
-> 作者：何健伟 (Supu7796) · 武汉纺织大学外经贸学院 · 大数据管理与应用 · 湖北省职业院校技能大赛 AI 赛道三等奖
 
 ![Python](https://img.shields.io/badge/python-3.10+-blue) ![YOLOv8](https://img.shields.io/badge/YOLOv8-ultralytics-red) ![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-orange)
 
